@@ -1,0 +1,42 @@
+class Solution {
+public:
+     int visit[5001];
+    int pathvisit[5001];
+    bool dfs(int node, vector<int>adj[5001])
+    {
+      
+        pathvisit[node]=visit[node]=1;
+        for(auto it : adj[node])
+        {
+            if(!visit[it])
+            {
+                if(dfs(it,adj)==false)
+                    return false;
+            }   
+            
+            else if(pathvisit[it])return false;
+            
+        }      
+        pathvisit[node]=0;
+        return true;
+      
+    } 
+    bool canFinish(int numCourses, vector<vector<int>>& pre) {
+        
+      vector<int>adj[5001];     
+      for(auto e:pre)
+          adj[e[1]].push_back(e[0]);
+        memset(visit,0,sizeof(visit));
+         memset(pathvisit,0,sizeof(pathvisit));
+        bool ans=true;
+        for(auto e:pre)
+        {
+            if(visit[e[1]]==0)
+            {   ans=  dfs(e[1],adj);
+                if(!ans)return ans;
+             }
+        }
+        return ans;
+        
+    }
+};
