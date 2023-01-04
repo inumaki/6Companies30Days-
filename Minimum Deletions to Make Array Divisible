@@ -1,0 +1,36 @@
+#define ll long long
+class Solution {
+public:
+
+int gcd(int a,int b)
+{
+if(a==0)
+return b;
+return gcd(b%a,a);
+
+}
+int minOperations(vector<int>& nums, vector<int>& numsDivide)
+ {
+
+     sort(nums.begin(),nums.end());
+     sort(numsDivide.begin(),numsDivide.end());
+int ans=numsDivide[0];
+for(auto it:numsDivide)
+{
+ans= gcd(ans,it);
+if(ans==1)
+break;
+
+}
+for(int i=0;i<nums.size();i++)
+{
+if(ans%nums[i]==0)
+{
+    return i;
+}
+}
+return -1;
+
+
+    }
+};
