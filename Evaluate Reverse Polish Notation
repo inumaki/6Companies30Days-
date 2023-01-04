@@ -1,0 +1,51 @@
+class Solution {
+public:
+
+    int evaluate(string op1,string op2,string oper)
+    {
+
+    int a= stoi(op1);
+        int b= stoi(op2);
+       if(oper=="+")
+    return a+b;
+    else if(oper=="-")
+	return a-b;
+    else if(oper=="*")     
+		return a*b;
+    else 
+	 return a/b;
+    }
+    
+    int evalRPN(vector<string>& tokens) {
+        
+        
+        stack<string>s;
+        int result =0;
+       map<string,int>m{{"+",1},{"-",1},{"*",1},{"/",1}};
+        
+        for(auto e:tokens)
+        {
+        if(m.count(e))
+        {
+            string op2= s.top();
+            s.pop();
+            string op1= s.top();
+            s.pop();
+            result= evaluate(op1,op2,e);
+            s.push(to_string(result));
+            
+        }
+            else
+            s.push(e);
+        
+        }
+        
+    result= stoi(s.top());
+        return result;
+        
+        
+        
+        
+        
+    }
+};
