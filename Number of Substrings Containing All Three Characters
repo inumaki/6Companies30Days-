@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+    
+map<char,int>m;
+int low=0, high=0;
+int ans=0;
+int n=s.size();
+while(low<s.size())
+{
+
+while( (m['a']<1 or m['b']<1 or m['c']<1)  and high<s.size())
+{
+m[s[high]]++;
+    high++;
+}
+if(m['a']>=1 and m['b']>=1 and m['c']>=1)
+    ans+= n-high+1;
+
+
+m[s[low]]--;
+low++;
+}
+
+return ans;
+    }
+};
